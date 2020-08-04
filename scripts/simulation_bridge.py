@@ -5,12 +5,22 @@ from std_msgs.msg import Float32
 from std_msgs.msg import Float64
 from ackermann_msgs.msg import AckermannDriveStamped
 
+from enum import Enum
+
+
+class DriveMode(Enum):
+    MANUAL = "MANUAL"
+    AUTOMATIC = "AUTOMATIC"
+    SEMI_AUTOMATIC = "SEMI-AUTOMATIC"
+    pass
+
 
 class SimulatorBridge:
     '''Class providing interface between model in simulation and autonomy'''
 
     def __init__(self):
         rospy.init_node("simulation_bridge", anonymous=True)
+        self.mode = DriveMode.AUTOMATIC
 
         # Init publishers
         self.pub_vel_left_rear_wheel = rospy.Publisher(
