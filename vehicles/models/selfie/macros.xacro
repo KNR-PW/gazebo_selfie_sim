@@ -4,43 +4,30 @@
 <!-- inertial parameter macros -->
 
 
-<xacro:property name="wheelRadius" value="${0.04}" />
-<xacro:property name="wheelWidth" value="${0.03 }" />
-<xacro:property name="wheelMass" value="${100 }" />
-
-<xacro:property name="hingeRadius" value="${0.1 }" />
-<xacro:property name="hingeMass" value="${1 }" />
-
-
-<xacro:property name="chassisX" value="${0.22 }" />
-<xacro:property name="chassisY" value="${0.2 }" />
-<xacro:property name="chassisZ" value="${0.1 }" />
-<xacro:property name="chassisMass" value="${1000}" />
-
 
 <xacro:macro name="chassis_inertial_params">
-  <origin xyz="${chassisX/2} 0 0" rpy="0 0 0" />
-  <mass value="${chassisMass}" />
-  <inertia ixx="${chassisMass*(chassisY*chassisY + chassisZ*chassisZ)/12}" ixy="0"          ixz="0"
-                          iyy="${chassisMass*(chassisX*chassisX + chassisZ*chassisZ)/12}"   iyz="0"
-                                           izz="${chassisMass*(chassisY*chassisY + chassisX*chassisX)/12}" />
+  <origin xyz="${chassis_x/2} 0 0" rpy="0 0 0" />
+  <mass value="${chassis_mass}" />
+  <inertia ixx="${chassis_mass*(chassis_y*chassis_y + chassis_z*chassis_z)/12}" ixy="0"          ixz="0"
+                          iyy="${chassis_mass*(chassis_x*chassis_x + chassis_z*chassis_z)/12}"   iyz="0"
+                                           izz="${chassis_mass*(chassis_y*chassis_y + chassis_x*chassis_x)/12}" />
 </xacro:macro>
 
 <xacro:macro name="wheel_inertial_params">
   <origin xyz="0 0 0" rpy="0 0 0" />
-  <mass value="${wheelMass}" />
-  <inertia ixx="${wheelMass*(3*wheelRadius*wheelRadius+wheelWidth*wheelWidth)/12}" ixy="0"          ixz="0"
-                            iyy="${wheelMass*(3*wheelRadius*wheelRadius+wheelWidth*wheelWidth)/12}" iyz="0"
-                                             izz="${wheelMass*wheelRadius*wheelRadius/2}" />
+  <mass value="${wheel_mass}" />
+  <inertia ixx="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_width*wheel_width)/12}" ixy="0"          ixz="0"
+                            iyy="${wheel_mass*(3*wheel_radius*wheel_radius+wheel_width*wheel_width)/12}" iyz="0"
+                                             izz="${wheel_mass*wheel_radius*wheel_radius/2}" />
 </xacro:macro>
 
 
 <xacro:macro name="steering_hinge_inertial_params">
   <origin xyz="0 0 0" rpy="0 0 0" />
-  <mass value="${hingeMass}" />
-  <inertia ixx="${2*hingeMass*hingeRadius*hingeRadius/3}" ixy="0"           ixz="0"
-                            iyy="${2*hingeMass*hingeRadius*hingeRadius/3}"  iyz="0"
-                                              izz="${2*hingeMass*hingeRadius*hingeRadius/3}" />
+  <mass value="${hinge_mass}" />
+  <inertia ixx="${2*hinge_mass*hinge_radius*hinge_radius/3}" ixy="0"           ixz="0"
+                            iyy="${2*hinge_mass*hinge_radius*hinge_radius/3}"  iyz="0"
+                                              izz="${2*hinge_mass*hinge_radius*hinge_radius/3}" />
 </xacro:macro>
 
 <xacro:macro name="hokuyo_inertial_params">
@@ -55,7 +42,7 @@
 <!-- geometry macros -->
 
 <xacro:macro name="chassis_geometry">
-  <origin xyz="${chassisX/2} 0 0" rpy="0 0 0" /> <!-- origin xyz="-0.08 0 0" rpy="0 0 0"-->
+  <origin xyz="${chassis_x/2} 0 0" rpy="0 0 0" /> <!-- origin xyz="-0.08 0 0" rpy="0 0 0"-->
   <geometry>
     <mesh filename="package://gazebo_selfie_sim/vehicles/models/selfie/meshes/my_chasis.STL"/>
   </geometry>
@@ -65,7 +52,7 @@
 <xacro:macro name="wheel_geometry">
   <origin xyz="0 0 0.0" rpy="0 0 0" />
   <geometry>
-    <cylinder radius="${wheelRadius}" length="${wheelWidth}"/>
+    <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
   </geometry>
 </xacro:macro>
 <!-- transmission macros -->

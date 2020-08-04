@@ -1,0 +1,13 @@
+{
+  "wheel_radius": 0.04,
+  "wheel_width": 0.03,
+  "wheel_mass": 100.0,
+
+  "hinge_radius": 0.1,
+  "hinge_mass": 1,
+
+  "chassis_x": 0.22,
+  "chassis_y": 0.2,
+  "chassis_z": 0.1,
+  "chassis_mass": 1000
+}

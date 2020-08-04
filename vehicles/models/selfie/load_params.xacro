@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="selfie" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:property name="yaml_file" value="$(find gazebo_selfie_sim)/vehicles/models/selfie/config/dims.yaml" />
+<xacro:property name="params" value="${load_yaml(yaml_file)}"/>
+
+<xacro:property name="wheel_radius" value="${params['wheel_radius']}" />
+<xacro:property name="wheel_width" value="${ params['wheel_width']}" />
+<xacro:property name="wheel_mass" value="${params['wheel_mass']}" />
+
+<xacro:property name="hinge_radius" value="${params['hinge_radius']}" />
+<xacro:property name="hinge_mass" value="${params['hinge_mass']}" />
+
+
+<xacro:property name="chassis_x" value="${params['chassis_x']}" />
+<xacro:property name="chassis_y" value="${params['chassis_y']}" />
+<xacro:property name="chassis_z" value="${params['chassis_z']}" />
+<xacro:property name="chassis_mass" value="${params['chassis_mass']}" />
+
+</robot>

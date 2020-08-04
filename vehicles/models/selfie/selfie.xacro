@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <robot name="selfie" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/load_params.xacro" />
   <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/macros.xacro" />
   <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/selfie.gazebo" />
   <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/materials.xacro" />
 
 
+<xacro:property name="yaml_file" value="$(find gazebo_selfie_sim)/vehicles/models/selfie/config/dims.yaml" />
+<xacro:property name="props" value="${load_yaml(yaml_file)}"/>
   <link name="selfie">
   </link>
 
@@ -36,7 +39,7 @@
   </link>
 
   <joint name="left_rear_steering_hinge_joint" type="revolute">
-    <origin xyz="0 ${chassisY/2} 0" rpy="0 0 0" /> <!-- 0.325-->
+    <origin xyz="0 ${chassis_y/2} 0" rpy="0 0 0" /> <!-- 0.325-->
     <parent link="base_link" />
     <child link="left_rear_steering_hinge" />
     <axis xyz="0 0 1" />
@@ -54,7 +57,7 @@
   </link>
 
   <joint name="right_rear_steering_hinge_joint" type="revolute">
-    <origin xyz="0 ${-chassisY/2} 0" rpy="0 0 0" />  <!-- 0.325-->
+    <origin xyz="0 ${-chassis_y/2} 0" rpy="0 0 0" />  <!-- 0.325-->
     <parent link="base_link" />
     <child link="right_rear_steering_hinge" />
     <axis xyz="0 0 1" />
@@ -121,7 +124,7 @@
   </link>
 
   <joint name="left_front_steering_hinge_joint" type="revolute">
-    <origin xyz="${chassisX} ${chassisY/2} 0" rpy="0 0 0" /> <!-- 0.325-->
+    <origin xyz="${chassis_x} ${chassis_y/2} 0" rpy="0 0 0" /> <!-- 0.325-->
     <parent link="base_link" />
     <child link="left_front_steering_hinge" />
     <axis xyz="0 0 1" />
@@ -139,7 +142,7 @@
   </link>
 
   <joint name="right_front_steering_hinge_joint" type="revolute">
-    <origin xyz="${chassisX} -${chassisY/2} 0" rpy="0 0 0" />  <!-- 0.325-->
+    <origin xyz="${chassis_x} -${chassis_y/2} 0" rpy="0 0 0" />  <!-- 0.325-->
     <parent link="base_link" />
     <child link="right_front_steering_hinge" />
     <axis xyz="0 0 1" />
