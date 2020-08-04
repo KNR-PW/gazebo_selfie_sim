@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="carollo_track_v0">
+    <include>
+      <uri>model://gazebo_selfie_sim/worlds/models/f1_tenth_easy_map</uri>
+      <name>track</name>
+      <pose>5.74 2.33 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+      <pose>0 0 10 0 0 0</pose>
+      <name>sun</name>
+    </include>
+
+    <include>
+      <uri>model://gazebo_selfie_sim/worlds/models/carollo_track_v1</uri>
+      <name>track</name>
+      <pose>3.78 4.56 0 0 0 0</pose>
+    </include>
+  </world>
+</sdf>
