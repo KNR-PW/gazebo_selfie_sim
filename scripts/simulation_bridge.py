@@ -22,6 +22,15 @@ class SimulatorBridge:
         rospy.init_node("simulation_bridge", anonymous=True)
         self.mode = DriveMode.AUTOMATIC
 
+        # Read parameters
+        self.wheels_perimeter = rospy.get_param("/wheel_radius")*2*3.14
+
+        # Init Subscribers
+        self.sub_drive = rospy.Subscriber(
+            "/sim_drive", AckermannDriveStamped, self.drive_callback)
+
+        # TODO add Subscribers/services for switching mode
+
         # Init publishers
         self.pub_vel_left_rear_wheel = rospy.Publisher(
             '/vehicle/left_rear_wheel_velocity_controller/command', Float64,
