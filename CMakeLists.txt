@@ -9,3 +9,6 @@ catkin_package(
 include_directories(
 )
 
+message(x ${CMAKE_INSTALL_PREFIX})
+message(x ${CATKIN_DEVEL_PREFIX})
+message(x ${CATKIN_PACKAGE_BIN_DESTINATION})
