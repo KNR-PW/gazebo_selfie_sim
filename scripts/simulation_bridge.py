@@ -62,6 +62,10 @@ class SimulatorBridge:
         self.pub_pos_right_rear_steering_hinge = rospy.Publisher(
             '/vehicle/right_rear_steering_hinge_position_controller/command', Float64, queue_size=1)
 
+        # Other variables
+        self.hinge_angle = 0
+        self.wheels_speed = 0
+
         pass
 
     def run(self):
@@ -70,11 +74,13 @@ class SimulatorBridge:
 
     def drive_callback(self, data):
         if self.mode == DriveMode.AUTOMATIC:
-            self.load_speeds(data)
-            self.load_hinges_positions(data)
+            self.wheels_speed = data.drive.steering_angle
+            self.hinge_angle = data.drive.steering_angle
+
             pass
         elif self.mode == DriveMode.SEMI_AUTOMATIC:
-            self.load_hinges_positions(data)
+            self.hinge_angle = data.drive.steering_angle
+
             pass
         elif self.mode == DriveMode.MANUAL:
             return
@@ -88,24 +94,17 @@ class SimulatorBridge:
         if self.mode == DriveMode.AUTOMATIC:
             return
         elif self.mode == DriveMode.SEMI_AUTOMATIC:
-            self.load_speeds(data)
+            self.wheels_speed = data.drive.steering_angle
             pass
         elif self.mode == DriveMode.MANUAL:
-            self.load_speeds(data)
-            self.load_hinges_positions(data)
+            self.wheels_speed = data.drive.steering_angle
+            self.hinge_angle = data.drive.steering_angle
+
             pass
         else:
             rospy.logerr("Wrong value of mode")
 
         self.move_model()
-        pass
-
-    def load_speeds(self, data):
-        # TODO
-        pass
-
-    def load_hinges_positions(self, data):
-        # TODO
         pass
 
     def move_model(self):
