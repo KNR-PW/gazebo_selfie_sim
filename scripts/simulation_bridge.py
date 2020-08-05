@@ -6,6 +6,7 @@ from std_msgs.msg import Float64
 from ackermann_msgs.msg import AckermannDriveStamped
 
 from enum import Enum
+from math import pi
 
 
 class DriveMode(Enum):
@@ -23,7 +24,7 @@ class SimulatorBridge:
         self.mode = DriveMode.AUTOMATIC
 
         # Read parameters
-        self.wheels_perimeter = rospy.get_param("/wheel_radius")*2*3.14
+        self.wheels_perimeter = rospy.get_param("/wheel_radius")*2*pi
 
         # Init Subscribers
         self.sub_drive = rospy.Subscriber(
