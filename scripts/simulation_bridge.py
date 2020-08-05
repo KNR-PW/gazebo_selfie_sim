@@ -70,25 +70,48 @@ class SimulatorBridge:
 
     def drive_callback(self, data):
         if self.mode == DriveMode.AUTOMATIC:
+            self.load_speeds(data)
+            self.load_hinges_positions(data)
             pass
         elif self.mode == DriveMode.SEMI_AUTOMATIC:
+            self.load_hinges_positions(data)
             pass
         elif self.mode == DriveMode.MANUAL:
             return
         else:
             rospy.logerr("Wrong value of mode")
 
+        self.move_model()
         pass
 
     def manual_drive_callback(self, data):
         if self.mode == DriveMode.AUTOMATIC:
-            pass
+            return
         elif self.mode == DriveMode.SEMI_AUTOMATIC:
+            self.load_speeds(data)
             pass
         elif self.mode == DriveMode.MANUAL:
+            self.load_speeds(data)
+            self.load_hinges_positions(data)
             pass
         else:
             rospy.logerr("Wrong value of mode")
+
+        self.move_model()
+        pass
+
+    def load_speeds(self, data):
+        # TODO
+        pass
+
+    def load_hinges_positions(self, data):
+        # TODO
+        pass
+
+    def move_model(self):
+        '''Send data about position of hinges and speed of wheels to model'''
+        # TODO
+        pass
 
     pass
 
