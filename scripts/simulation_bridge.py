@@ -27,8 +27,10 @@ class SimulatorBridge:
         self.wheels_perimeter = rospy.get_param("/wheel_radius")*2*pi
 
         # Init Subscribers
+        self.sub_manual_drive = rospy.Subscriber(
+            "/manual_drive", AckermannDriveStamped, self.manual_drive_callback)
         self.sub_drive = rospy.Subscriber(
-            "/sim_drive", AckermannDriveStamped, self.drive_callback)
+            "/drive", AckermannDriveStamped, self.drive_callback)
 
         # TODO add Subscribers/services for switching mode
 
@@ -67,7 +69,26 @@ class SimulatorBridge:
         pass
 
     def drive_callback(self, data):
+        if self.mode == DriveMode.AUTOMATIC:
+            pass
+        elif self.mode == DriveMode.SEMI_AUTOMATIC:
+            pass
+        elif self.mode == DriveMode.MANUAL:
+            return
+        else:
+            rospy.logerr("Wrong value of mode")
+
         pass
+
+    def manual_drive_callback(self, data):
+        if self.mode == DriveMode.AUTOMATIC:
+            pass
+        elif self.mode == DriveMode.SEMI_AUTOMATIC:
+            pass
+        elif self.mode == DriveMode.MANUAL:
+            pass
+        else:
+            rospy.logerr("Wrong value of mode")
 
     pass
 
