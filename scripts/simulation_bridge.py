@@ -33,6 +33,9 @@ class SimulatorBridge:
         # TODO add Subscribers/services for switching mode
 
         # Init publishers
+        self.pub_speed = rospy.Publisher('/speed', Float32, queue_size=1)
+        self.pub_distance = rospy.Publisher('/distance', Float32, queue_size=1)
+
         self.pub_vel_left_rear_wheel = rospy.Publisher(
             '/vehicle/left_rear_wheel_velocity_controller/command', Float64,
             queue_size=1)
