@@ -132,5 +132,11 @@ class SimulatorBridge:
 
 
 if __name__ == '__main__':
-
+    bridge = SimulatorBridge()
+    try:
+        bridge.run()
+    except ValueError as e:
+        rospy.logerr("Unexpected error: "+str(e))
+    finally:
+        rospy.logfatal("Unexpected error occurred, closing node")
     pass
