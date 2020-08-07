@@ -109,7 +109,23 @@ class SimulatorBridge:
 
     def move_model(self):
         '''Send data about position of hinges and speed of wheels to model'''
-        # TODO
+
+        # TODO add modes for Ackermann etc
+        hinge_front_left = -self.hinge_angle
+        hinge_front_right = -self.hinge_angle
+        hinge_rear_left = 0
+        hinge_rear_right = 0
+
+        # Send data
+        self.pub_vel_left_rear_wheel.publish(self.wheels_speed)
+        self.pub_vel_right_rear_wheel.publish(self.wheels_speed)
+        self.pub_vel_left_front_wheel.publish(self.wheels_speed)
+        self.pub_vel_right_front_wheel.publish(self.wheels_speed)
+
+        self.pub_pos_left_front_steering_hinge.publish(hinge_front_left)
+        self.pub_pos_right_front_steering_hinge.publish(hinge_front_right)
+        self.pub_pos_left_rear_steering_hinge.publish(hinge_rear_left)
+        self.pub_pos_right_rear_steering_hinge.publish(hinge_rear_right)
         pass
 
     pass
