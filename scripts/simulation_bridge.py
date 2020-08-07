@@ -24,7 +24,8 @@ class SimulatorBridge:
         self.mode = DriveMode.AUTOMATIC
 
         # Read parameters
-        self.wheels_perimeter = rospy.get_param("/wheel_radius")*2*pi
+        self.wheels_radius = rospy.get_param("/wheel_radius", default=0.03)
+        self.wheels_perimeter = self.wheels_radius*2*pi
 
         # Init Subscribers
         self.sub_manual_drive = rospy.Subscriber(
@@ -64,7 +65,7 @@ class SimulatorBridge:
 
         # Other variables
         self.hinge_angle = 0
-        self.wheels_speed = 0
+        self.wheels_speed = 0  # speed in rad/s
 
         pass
 
@@ -126,6 +127,13 @@ class SimulatorBridge:
         self.pub_pos_right_front_steering_hinge.publish(hinge_front_right)
         self.pub_pos_left_rear_steering_hinge.publish(hinge_rear_left)
         self.pub_pos_right_rear_steering_hinge.publish(hinge_rear_right)
+
+        self.send_speed_and_distance()
+        pass
+
+    def send_speed_and_distance(self):
+        self.pub_speed.publish(self.wheels_speed*self.wheels_radius)
+
         pass
 
     pass
