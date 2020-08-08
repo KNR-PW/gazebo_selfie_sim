@@ -14,6 +14,7 @@
 
  - `drive` ([ackermann_msgs/AckermannDriveStamped](http://docs.ros.org/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)) - Steering commands to be applied.
 
+ - `manual_drive` ([ackermann_msgs/AckermannDriveStamped](http://docs.ros.org/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)) - Manual steering commands from human
 
 ### Published topics
 
