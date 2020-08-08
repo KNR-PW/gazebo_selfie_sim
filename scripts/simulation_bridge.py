@@ -73,7 +73,7 @@ class SimulatorBridge:
         pass
 
     def run(self):
-
+        rospy.spin()
         pass
 
     def drive_callback(self, data):
