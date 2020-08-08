@@ -66,6 +66,9 @@ class SimulatorBridge:
         # Other variables
         self.hinge_angle = 0
         self.wheels_speed = 0  # speed in rad/s
+        self.distance = 0
+        self.is_timer_measueable = False
+        self.time_of_last_measurement = rospy.get_time()
 
         pass
 
@@ -132,8 +135,18 @@ class SimulatorBridge:
         pass
 
     def send_speed_and_distance(self):
+        # TODO think about better ways of counting speed and distance
         self.pub_speed.publish(self.wheels_speed*self.wheels_radius)
 
+        if self.is_timer_measueable:
+            self.distance = self.distance+self.wheels_speed*self.wheels_radius * \
+                (rospy.get_time() - self.time_of_last_measurement)
+            self.time_of_last_measurement = rospy.get_time()
+        else:
+            self.is_timer_measueable = True
+            self.time_of_last_measurement = rospy.get_time()
+
+        self.pub_distance.publish(self.distance)
         pass
 
     pass
