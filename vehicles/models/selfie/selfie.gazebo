@@ -11,7 +11,11 @@
   <kp  value="10000000.0" />
   <kd  value="1.0" />
   <material>Gazebo/Red</material>
+  <light type="spot" name="light">
+    <pose>0 0 1 0 0 0</pose>
+  </light>
 </gazebo>
+
 
 <gazebo reference="left_rear_wheel">
   <mu1 value="0.1"/>
