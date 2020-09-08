@@ -1,0 +1,13 @@
+<launch>
+  <arg name="model_name" default="selfie"/>
+  <arg name="world_name" default="carollo_track_v0"/>
+  <include file="$(find gazebo_selfie_sim)/worlds/launch/world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
+  <include file="$(find gazebo_selfie_sim)/vehicles/launch/spawn_car.launch">
+    <arg name="model_name" value="$(arg model_name)"/>
+  </include>
+
+  <node pkg="gazebo_selfie_sim" name="simulation_bridge" type="simulation_bridge.py" output="screen"/>
+  <node pkg="gazebo_selfie_sim" name="manual_steering" type="manual_steering.py" output="screen"/>
+</launch>
