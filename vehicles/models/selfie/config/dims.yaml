@@ -1,0 +1,23 @@
+{
+  "wheel_radius": 0.04,
+  "wheel_width": 0.03,
+  "wheel_mass": 10.0,
+  "front_wheel_x": 0.22,
+  "rear_wheel_x": 0.0,
+  "wheel_y": 0.1,
+
+  "hinge_radius": 0.1,
+  "hinge_mass": 1,
+
+  "chassis_x": 0.22,
+  "chassis_y": 0.2,
+  "chassis_z": 0.1,
+  "chassis_mass": 100,
+  
+  "indicator_front_x": 0.26,
+  "indicator_back_x": -0.04,
+  "indicator_y": 0.04,
+  "indicator_z": 0.01,
+  "indicator_width": 0.019,
+  "indicator_radius": 0.01
+}
