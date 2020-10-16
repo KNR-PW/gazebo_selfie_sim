@@ -20,10 +20,10 @@
 
   <xacro:macro name="camera_plugin_params"  xmlns:xacro="http://www.ros.org/wiki/xacro"> 
     <alwaysOn>true</alwaysOn>
-    <updateRate>100</updateRate>    <!-- 30 -->
+    <updateRate>70</updateRate>    <!-- 30 -->
     <cameraName>/camera/zed</cameraName>
-    <imageTopicName>/image_rect</imageTopicName>
-    <cameraInfoTopicName>/camera_info</cameraInfoTopicName>
+    <imageTopicName>/camera_basler/image_rect</imageTopicName>
+    <cameraInfoTopicName>/camera_basler/camera_info</cameraInfoTopicName>
     <frameName>lens_link</frameName>
     <hackBaseline>0</hackBaseline><!-- set this to 0.12 for the second camera -->
     <distortionK1>0.0</distortionK1>

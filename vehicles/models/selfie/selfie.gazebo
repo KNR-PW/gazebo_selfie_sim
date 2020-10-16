@@ -63,7 +63,7 @@
     <plugin name="indicator" filename="libIndicatorPlugin.so">
       <on_color>1 0.6 0 1</on_color>
       <off_color>0 0 0 1</off_color>
-      <topic>right_turn_indicator</topic>
+      <topic>sim_right_turn_indicator</topic>
       <period>1</period>
     </plugin>
   </visual>
@@ -76,7 +76,7 @@
     <plugin name="indicator" filename="libIndicatorPlugin.so">
       <on_color>1 0.6 0 1</on_color>
       <off_color>0 0 0 1</off_color>
-      <topic>left_turn_indicator</topic>
+      <topic>sim_left_turn_indicator</topic>
       <period>1</period>
     </plugin>
   </visual>
@@ -89,7 +89,7 @@
     <plugin name="indicator" filename="libIndicatorPlugin.so">
       <on_color>1 0.6 0 1</on_color>
       <off_color>0 0 0 1</off_color>
-      <topic>right_turn_indicator</topic>
+      <topic>sim_right_turn_indicator</topic>
       <period>1</period>
     </plugin>
   </visual>
@@ -102,7 +102,7 @@
     <plugin name="indicator" filename="libIndicatorPlugin.so">
       <on_color>1 0.6 0 1</on_color>
       <off_color>0 0 0 1</off_color>
-      <topic>left_turn_indicator</topic>
+      <topic>sim_left_turn_indicator</topic>
       <period>1</period>
     </plugin>
   </visual>
@@ -145,9 +145,9 @@
 
 <!-- hokuyo -->
 <gazebo reference="laser">
-  <sensor type="gpu_ray" name="head_hokuyo_sensor">
+  <sensor type="ray" name="head_hokuyo_sensor">
     <xacro:lidar_params /> 
-    <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+    <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
       <topicName>/scan</topicName>
       <frameName>laser</frameName>
     </plugin>

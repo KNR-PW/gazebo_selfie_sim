@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  tf
+  custom_msgs
   gazebo_ros
   roslint
   robot_state_publisher
@@ -27,7 +29,7 @@ include_directories(
 )
 
 catkin_package(
-  DEPENDS
+  CATKIN_DEPENDS custom_msgs
 )
 
 roslint_cpp()
