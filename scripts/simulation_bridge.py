@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import rospy
-from std_msgs.msg import Bool
-from std_msgs.msg import Float32
+import tf
+from custom_msgs.msg import DriveCommand
+from custom_msgs.msg import Indicators
+from custom_msgs.msg import Motion
 from std_msgs.msg import Float64
 from std_msgs.msg import UInt8
-from ackermann_msgs.msg import AckermannDriveStamped
+from std_msgs.msg import Bool
 from sensor_msgs.msg import JointState
+from sensor_msgs.msg import Imu
 
 from enum import Enum
 from math import pi
@@ -28,33 +31,41 @@ class SimulatorBridge:
         self.mode = self.DriveMode.AUTOMATIC
 
         # Other variables
-        self.hinge_angle = 0
+        self.hinge_angle_front = 0
+        self.hinge_angle_rear = 0
         self.wheels_speed = 0  # speed in rad/s
         self.distance = 0
         self.last_position_of_wheel = 0
+        self.imu_yaw = 0
+        self.imu_yaw_speed = 0
         # name of joint measured to get speed and distance speed
         self.joint_name = "right_rear_wheel_joint"
         self.is_speed_measurement_started = False
 
         # Read parameters
-        self.wheels_radius = rospy.get_param("/vehicle/wheel_radius", default=0.03)
+        self.wheels_radius = rospy.get_param(
+            "/vehicle/wheel_radius", default=0.03)
         self.wheels_perimeter = self.wheels_radius*2*pi
 
         # Init Subscribers
         self.sub_manual_drive = rospy.Subscriber(
-            "/drive/manual", AckermannDriveStamped, self.manual_drive_callback)
+            "/drive/manual", DriveCommand, self.manual_drive_callback)
         self.sub_drive = rospy.Subscriber(
-            "/drive/out", AckermannDriveStamped, self.drive_callback)
+            "/selfie_in/drive", DriveCommand, self.drive_callback)
         self.sub_joints_states = rospy.Subscriber(
             "/vehicle/joint_states", JointState, self.send_speed_and_distance)
+        self.sub_indicators = rospy.Subscriber(
+            "/selfie_in/indicators", Indicators, self.indicators_callback)
 
         # Init Subscribers
         self.sub_drive_mode = rospy.Subscriber(
             "/simulation/switch_state", UInt8, self.change_mode_callback)
+        self.sub_imu = rospy.Subscriber(
+            '/imu', Imu, self.imu_callback)
 
         # Init publishers
-        self.pub_speed = rospy.Publisher('/stm32/speed', Float32, queue_size=1)
-        self.pub_distance = rospy.Publisher('/distance', Float32, queue_size=1)
+        self.pub_movement = rospy.Publisher(
+            '/selfie_out/motion', Motion, queue_size=1)
         self.pub_drive_mode = rospy.Publisher(
             "/switch_state", UInt8, queue_size=1)
 
@@ -81,6 +92,10 @@ class SimulatorBridge:
             queue_size=1)
         self.pub_pos_right_rear_steering_hinge = rospy.Publisher(
             '/vehicle/right_rear_steering_hinge_position_controller/command', Float64, queue_size=1)
+        self.pub_right_indicator = rospy.Publisher(
+            '/sim_right_turn_indicator', Bool, queue_size=1)
+        self.pub_left_indicator = rospy.Publisher(
+            '/sim_left_turn_indicator', Bool, queue_size=1)
 
         rospy.loginfo("simulation_bridge initialized")
 
@@ -88,12 +103,16 @@ class SimulatorBridge:
         rospy.loginfo("simulation_bridge started")
         rospy.spin()
 
-    def drive_callback(self, data):
+    def drive_callback(self, data: DriveCommand):
         if self.mode == self.DriveMode.AUTOMATIC:
-            self.wheels_speed = data.drive.speed
-            self.hinge_angle = data.drive.steering_angle
+            self.wheels_speed = data.speed
+            self.hinge_angle_front = data.steering_angle_front
+            self.hinge_angle_rear = data.steering_angle_rear
+
         elif self.mode == self.DriveMode.SEMI_AUTOMATIC:
-            self.hinge_angle = data.drive.steering_angle
+            self.hinge_angle_front = data.steering_angle_front
+            self.hinge_angle_rear = data.steering_angle_rear
+
         elif self.mode == self.DriveMode.MANUAL:
             return
         else:
@@ -105,10 +124,10 @@ class SimulatorBridge:
         if self.mode == self.DriveMode.AUTOMATIC:
             return
         elif self.mode == self.DriveMode.SEMI_AUTOMATIC:
-            self.wheels_speed = data.drive.speed
+            self.wheels_speed = data.speed
         elif self.mode == self.DriveMode.MANUAL:
-            self.wheels_speed = data.drive.speed
-            self.hinge_angle = data.drive.steering_angle
+            self.wheels_speed = data.speed
+            self.hinge_angle_front = data.steering_angle_front
         else:
             rospy.logerr("Wrong value of mode")
 
@@ -117,11 +136,10 @@ class SimulatorBridge:
     def move_model(self):
         '''Send data about position of hinges and speed of wheels to model'''
 
-        # TODO add modes for Ackermann etc
-        hinge_front_left = self.hinge_angle
-        hinge_front_right = self.hinge_angle
-        hinge_rear_left = 0
-        hinge_rear_right = 0
+        hinge_front_left = self.hinge_angle_front
+        hinge_front_right = self.hinge_angle_front
+        hinge_rear_left = self.hinge_angle_rear
+        hinge_rear_right = self.hinge_angle_rear
 
         # Send data
         self.pub_vel_left_rear_wheel.publish(
@@ -151,9 +169,13 @@ class SimulatorBridge:
             (msg.position[i]-self.last_position_of_wheel)*self.wheels_radius
         self.wheels_speed = msg.velocity[i]*self.wheels_radius
 
-        self.pub_distance.publish(Float32(self.distance))
-        self.pub_speed.publish(Float32(self.wheels_speed))
+        motion_msg = Motion()
+        motion_msg.distance = self.distance
+        motion_msg.speed_linear = self.wheels_speed
+        motion_msg.yaw = self.imu_yaw
+        motion_msg.speed_yaw = self.imu_yaw_speed
 
+        self.pub_movement.publish(motion_msg)
         self.last_position_of_wheel = msg.position[i]
 
     def change_mode_callback(self, msg: UInt8):
@@ -167,6 +189,20 @@ class SimulatorBridge:
         rospy.loginfo("Drive Mode changed on: " + self.mode)
         self.pub_drive_mode.publish(msg)
 
+    def indicators_callback(self, msg: Indicators):
+        self.pub_left_indicator.publish(msg.is_active_left)
+        self.pub_right_indicator.publish(msg.is_active_right)
+
+    def imu_callback(self, msg: Imu):
+        quaternion = (
+            msg.orientation.x,
+            msg.orientation.y,
+            msg.orientation.z,
+            msg.orientation.w)
+        euler = tf.transformations.euler_from_quaternion(quaternion)
+        self.imu_yaw = euler[2]
+        self.imu_yaw_speed = msg.angular_velocity.z
+
 
 if __name__ == '__main__':
     bridge = SimulatorBridge()
@@ -175,4 +211,5 @@ if __name__ == '__main__':
     except ValueError as e:
         rospy.logerr("Unexpected error: "+str(e))
     except Exception as e:
-        rospy.logfatal("Unexpected error occurred, closing node. Exception:" + str(e))
+        rospy.logfatal(
+            "Unexpected error occurred, closing node. Exception:" + str(e))

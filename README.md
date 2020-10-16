@@ -13,17 +13,15 @@
 ### Subscribed topics
 #### TODO Update docs about new interfaces used only by simulator (like drive-mode buttons handling etc)
 
- - `drive/out` ([ackermann_msgs/AckermannDriveStamped](http://docs.ros.org/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)) - Steering commands to be applied.
+ - `/selfie_in/drive` ([custom_msgs/DriveCommand](./../../Shared/custom_msgs/msg/DriveCommand.msg)) - Steering commands to be applied.
 
  - `drive/manual` ([ackermann_msgs/AckermannDriveStamped](http://docs.ros.org/api/ackermann_msgs/html/msg/AckermannDriveStamped.html)) - Manual steering commands from human
 
+ - `/selfie_in/indicators` ([custom_msgs/Indicators](./../../Shared/custom_msgs/msg/Indicators.msg)) - activity of right and left indicator
+
 ### Published topics
 
- - `imu` ([sensor_msgs/Imu](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Imu.html)) - Data stream from IMU.
-
- - `stm32/speed` ([std_msgs/Float32](http://docs.ros.org/api/std_msgs/html/msg/Float32.html)) - Linear velocity magnitude at the center of rear axle, as calculated from encoder data (in m/s).
-
- - `distance` ([std_msgs/Float32](http://docs.ros.org/api/std_msgs/html/msg/Float32.html)) - Distance covered by the car.
+ - `/selfie_out/motion` ([custom_msgs/Motion](./../../Shared/custom_msgs/msg/Motion.msg)) - speed, distance and Imu
 
  - `/image_rect` ([sensor_msgs/Image](http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html)) - Image from camera
 

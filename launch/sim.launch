@@ -1,6 +1,6 @@
 <launch>
   <arg name="model_name" default="selfie"/>
-  <arg name="world_name" default="carollo_track_v0"/>
+  <arg name="world_name" default="carollo_track_v1"/>
   <include file="$(find gazebo_selfie_sim)/worlds/launch/world.launch">
     <arg name="world_name" value="$(arg world_name)"/>
   </include>

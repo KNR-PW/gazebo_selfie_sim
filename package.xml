@@ -20,6 +20,8 @@
   <depend>controller_manager</depend>
   <depend>rospy</depend>
   <depend>roslint</depend>
+  <depend>tf</depend>
+  <depend>custom_msgs</depend>
 
 
   <export>

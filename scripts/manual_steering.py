@@ -2,7 +2,7 @@
 
 """Module for keyboard ackermann steering."""
 import rospy
-from ackermann_msgs.msg import AckermannDriveStamped
+from custom_msgs.msg import DriveCommand
 from std_msgs.msg import UInt8
 from pynput import keyboard
 
@@ -22,7 +22,8 @@ class ManualSteering(object):
         self.current_speed = 1.2
         self.speed_change_step = 0.05
         self.base_steering_angle = 0.5
-        self.ackermann_message = AckermannDriveStamped()
+        self.drive_message = DriveCommand()
+        self.drive_message.steering_angle_rear = 0
 
         self.hotkey_switch_mode = keyboard.HotKey(
             keyboard.HotKey.parse("<ctrl>+n"), self.switch_mode)
@@ -36,7 +37,7 @@ class ManualSteering(object):
 
         # Init Publishers
         self.pub_drive = rospy.Publisher(
-            "/drive/manual", AckermannDriveStamped, queue_size=1)
+            "/drive/manual", DriveCommand, queue_size=1)
         self.pub_switch_state = rospy.Publisher(
             "/simulation/switch_state", UInt8, queue_size=1)
 
@@ -58,15 +59,15 @@ class ManualSteering(object):
         self.hotkey_decrease_speed.press(key)
 
         if key == keyboard.Key.up:
-            self.ackermann_message.drive.speed = self.current_speed
+            self.drive_message.speed = self.current_speed
         elif key == keyboard.Key.down:
-            self.ackermann_message.drive.speed = -self.current_speed
+            self.drive_message.speed = -self.current_speed
         elif key == keyboard.Key.left:
-            self.ackermann_message.drive.steering_angle = self.base_steering_angle
+            self.drive_message.steering_angle_front = self.base_steering_angle
         elif key == keyboard.Key.right:
-            self.ackermann_message.drive.steering_angle = -self.base_steering_angle
+            self.drive_message.steering_angle_front = -self.base_steering_angle
 
-        self.pub_drive.publish(self.ackermann_message)
+        self.pub_drive.publish(self.drive_message)
 
     def on_release(self, key: keyboard.Key):
         self.hotkey_switch_mode.release(key)
@@ -74,11 +75,11 @@ class ManualSteering(object):
         self.hotkey_decrease_speed.release(key)
 
         if key == keyboard.Key.up or key == keyboard.Key.down:
-            self.ackermann_message.drive.speed = 0
+            self.drive_message.speed = 0
         elif key == keyboard.Key.left or key == keyboard.Key.right:
-            self.ackermann_message.drive.steering_angle = 0
+            self.drive_message.steering_angle_front = 0
 
-        self.pub_drive.publish(self.ackermann_message)
+        self.pub_drive.publish(self.drive_message)
 
     def switch_mode(self):
         self.current_drive_mode = (self.current_drive_mode + 1) % 3
