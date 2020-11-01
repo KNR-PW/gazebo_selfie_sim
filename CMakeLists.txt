@@ -29,7 +29,7 @@ include_directories(
 )
 
 catkin_package(
-  CATKIN_DEPENDS custom_msgs
+  CATKIN_DEPENDS custom_msgs tf roscpp
 )
 
 roslint_cpp()
