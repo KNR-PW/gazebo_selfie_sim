@@ -15,7 +15,7 @@
   <rosparam file="$(find gazebo_selfie_sim)/vehicles/models/selfie/config/dims.yaml" command="load" ns="vehicle"/>
 
 
-  <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model) robot_name:=$(arg model_name)" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"

@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
-<robot name="selfie" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/load_params.xacro" />
-  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/macros.xacro" />
-  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/selfie.gazebo" />
-  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/selfie/materials.xacro" />
+<robot name="$(arg robot_name)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/load_params.xacro" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/macros.xacro" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/selfie.gazebo" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/materials.xacro" />
 
 
-<xacro:property name="yaml_file" value="$(find gazebo_selfie_sim)/vehicles/models/selfie/config/dims.yaml" />
-<xacro:property name="props" value="${load_yaml(yaml_file)}"/>
-  <link name="selfie">
+  <xacro:property name="yaml_file" value="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/config/dims.yaml" />
+  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+
+  <link name="$(arg robot_name)">
   </link>
 
   <link name="base_link">
@@ -24,7 +26,7 @@
 
   <joint name="base_link" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 0.325-->
-    <parent link="selfie" />
+    <parent link="$(arg robot_name)" />
     <child link="base_link" />
   </joint>
 
