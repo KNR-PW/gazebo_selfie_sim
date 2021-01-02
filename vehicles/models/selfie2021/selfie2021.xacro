@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+
+<robot name="$(arg robot_name)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/load_params.xacro" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/macros.xacro" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/selfie.gazebo" />
+  <xacro:include filename="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/materials.xacro" />
+
+
+  <xacro:property name="yaml_file" value="$(find gazebo_selfie_sim)/vehicles/models/$(arg robot_name)/config/dims.yaml" />
+  <xacro:property name="props" value="${load_yaml(yaml_file)}"/>
+
+  <link name="$(arg robot_name)">
+  </link>
+
+  <link name="base_link">
+    <inertial>
+      <xacro:chassis_inertial_params />
+    </inertial>
+    <visual>
+      <xacro:chassis_geometry/>
+      <material name="red" />
+    </visual>
+  </link>
+
+  <joint name="base_link" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- 0.325-->
+    <parent link="$(arg robot_name)" />
+    <child link="base_link" />
+  </joint>
+
+
+
+  <!-- Add the left rear steering hinge with its joints and tranmissions -->
+
+  <link name="left_rear_steering_hinge">
+    <inertial>
+      <xacro:steering_hinge_inertial_params />
+    </inertial>
+  </link>
+
+  <joint name="left_rear_steering_hinge_joint" type="revolute">
+    <origin xyz="${rear_wheel_x} ${wheel_y} 0" rpy="0 0 0" /> <!-- 0.325-->
+    <parent link="base_link" />
+    <child link="left_rear_steering_hinge" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.0" upper="1.0" effort="10000" velocity="1000" />
+  </joint>
+
+  <xacro:steering_hinge_transmission name="left_rear_steering_hinge" />
+
+<!-- Add the right rearsteering hinge with its joints and tranmissions -->
+
+  <link name="right_rear_steering_hinge">
+    <inertial>
+      <xacro:steering_hinge_inertial_params />
+    </inertial>
+  </link>
+
+  <joint name="right_rear_steering_hinge_joint" type="revolute">
+    <origin xyz="${rear_wheel_x} ${-wheel_y} 0" rpy="0 0 0" />  <!-- 0.325-->
+    <parent link="base_link" />
+    <child link="right_rear_steering_hinge" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.0" upper="1.0" effort="10000" velocity="1000" />
+  </joint>
+
+  <xacro:steering_hinge_transmission name="right_rear_steering_hinge" /> 
+  <!-- Add the left rear wheel with its joints and tranmissions -->
+
+  <link name="left_rear_wheel">
+    <inertial>
+      <xacro:wheel_inertial_params />
+    </inertial>
+    <visual>
+      <xacro:wheel_geometry />
+      <material name="black" />
+    </visual>
+    <collision>
+      <xacro:wheel_geometry />
+    </collision>
+  </link>
+
+  <joint name="left_rear_wheel_joint" type="continuous">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="left_rear_steering_hinge" />
+    <child link="left_rear_wheel" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" velocity="100"/>
+  </joint>
+  <xacro:wheel_transmission name="left_rear_wheel" />
+
+
+  <!-- Add the right rear wheel with its joints and tranmissions -->
+
+  <link name="right_rear_wheel">
+    <inertial>
+      <xacro:wheel_inertial_params />
+    </inertial>
+    <visual>
+      <xacro:wheel_geometry />
+      <material name="black" />
+    </visual>
+    <collision>
+      <xacro:wheel_geometry />
+    </collision>
+  </link>
+
+  <joint name="right_rear_wheel_joint" type="continuous">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="right_rear_steering_hinge" />
+    <child link="right_rear_wheel" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" velocity="100"/>
+  </joint>
+  <xacro:wheel_transmission name="right_rear_wheel" />
+
+
+  <!-- Add the left steering hinge with its joints and tranmissions -->
+
+  <link name="left_front_steering_hinge">
+    <inertial>
+      <xacro:steering_hinge_inertial_params />
+    </inertial>
+  </link>
+
+  <joint name="left_front_steering_hinge_joint" type="revolute">
+    <origin xyz="${front_wheel_x} ${wheel_y} 0" rpy="0 0 0" /> <!-- 0.325-->
+    <parent link="base_link" />
+    <child link="left_front_steering_hinge" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.0" upper="1.0" effort="10000" velocity="1000" />
+  </joint>
+
+  <xacro:steering_hinge_transmission name="left_front_steering_hinge" />
+
+  <!-- Add the right steering hinge with its joints and tranmissions -->
+
+  <link name="right_front_steering_hinge">
+    <inertial>
+      <xacro:steering_hinge_inertial_params />
+    </inertial>
+  </link>
+
+  <joint name="right_front_steering_hinge_joint" type="revolute">
+    <origin xyz="${front_wheel_x} -${wheel_y} 0" rpy="0 0 0" />  <!-- 0.325-->
+    <parent link="base_link" />
+    <child link="right_front_steering_hinge" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.0" upper="1.0" effort="10000" velocity="1000" />
+  </joint>
+
+  <xacro:steering_hinge_transmission name="right_front_steering_hinge" />
+
+  <!-- Add the left front wheel with its joints and tranmissions -->
+
+  <link name="left_front_wheel">
+    <inertial>
+      <xacro:wheel_inertial_params />
+    </inertial>
+    <visual>
+      <xacro:wheel_geometry />
+      <material name="black" />
+    </visual>
+    <collision>
+      <xacro:wheel_geometry />
+    </collision>
+  </link>
+
+  <joint name="left_front_wheel_joint" type="continuous">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="left_front_steering_hinge" />
+    <child link="left_front_wheel" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" velocity="100"/>
+  </joint>
+
+  <xacro:wheel_transmission name="left_front_wheel" />
+
+  <!-- Add the left front wheel with its joints and tranmissions -->
+
+  <link name="right_front_wheel">
+    <inertial>
+      <xacro:wheel_inertial_params />
+    </inertial>
+    <visual>
+      <xacro:wheel_geometry />
+      <material name="black" />
+    </visual>
+    <collision>
+      <xacro:wheel_geometry />
+    </collision>
+  </link>
+
+  <joint name="right_front_wheel_joint" type="continuous">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="right_front_steering_hinge" />
+    <child link="right_front_wheel" />
+    <axis xyz="0 1 0" />
+    <limit effort="100" velocity="100"/>
+  </joint>
+
+  <xacro:wheel_transmission name="right_front_wheel" />
+
+  <link name="right_front_indicator">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0.0"          ixz="0"
+                          iyy="0.01"   iyz="0"
+                                           izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${indicator_radius}" length="${indicator_width}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="right_front_indicator_joint" type="fixed">
+    <origin xyz="${indicator_front_x} -${indicator_y} ${indicator_z}" rpy="-1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="right_front_indicator" />
+  </joint>
+      
+  <link name="left_front_indicator">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0.0"          ixz="0"
+                          iyy="0.01"   iyz="0"
+                                           izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${indicator_radius}" length="${indicator_width}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="left_front_indicator_joint" type="fixed">
+    <origin xyz="${indicator_front_x} ${indicator_y} ${indicator_z}" rpy="-1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="left_front_indicator" />
+  </joint>
+
+
+
+  <link name="right_back_indicator">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0.0"          ixz="0"
+                          iyy="0.01"   iyz="0"
+                                           izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${indicator_radius}" length="${indicator_width}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="right_back_indicator_joint" type="fixed">
+    <origin xyz="${indicator_back_x} -${indicator_y} ${indicator_z}" rpy="-1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="right_back_indicator" />
+  </joint>
+      
+  <link name="left_back_indicator">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.01" ixy="0.0"          ixz="0"
+                          iyy="0.01"   iyz="0"
+                                           izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${indicator_radius}" length="${indicator_width}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="left_back_indicator_joint" type="fixed">
+    <origin xyz="${indicator_back_x} ${indicator_y} ${indicator_z}" rpy="-1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="left_back_indicator" />
+  </joint>
+
+
+  <!-- Add Hokuyo laser scanner -->
+
+  <link name="laser_base">
+    <inertial>
+      <xacro:hokuyo_inertial_params />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://gazebo_selfie_sim/vehicles/sensors/hokuyo/meshes/hokuyo.dae" scale="0.7 0.7 0.7"/>
+        <material name="grey" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <origin xyz="0.24 0.0 0.04" rpy="0 0 0"/>
+    <parent link="base_link" />
+    <child link="laser_base" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+
+  
+  <link name="laser">
+    <inertial>
+      <xacro:hokuyo_inertial_params />
+    </inertial>
+  </link>
+
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.015" rpy="0 0 0"/>
+    <parent link="laser_base" />
+    <child link="laser" />
+  </joint>
+
+
+
+  <!-- camera -->
+
+  <link name="mast_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="0.21"/>
+      </geometry>
+      <material name="black"/>
+      <origin xyz="0 0 0.1051" rpy="0 0 3.14"/><!--0.26-->
+    </visual>
+  </link>
+
+  <joint name="base_mast_joint" type="fixed">
+    <origin xyz="-0.02 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="mast_link"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+
+
+  <!-- camera lenses -->
+  <!-- It seems these have to have a non-zero mass to have a camera attached? -->
+
+  <link name="camera_link">
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/> <!--0.26-->
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://gazebo_selfie_sim/vehicles/sensors/camera/meshes/Basler.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <origin xyz="0.06 0.015 0" rpy="0 0 3.14"/><!--0.26-->
+      <material name="black"/>
+    </visual>
+  </link>
+
+  <joint name="imu_base_joint" type="fixed">
+    <origin xyz="0.15 0 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+  </joint>
+
+  <link name="imu_link">
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0 0 0.20" rpy="0 0.38 0"/> 
+    <parent link="mast_link"/>
+    <child link="camera_link"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <joint name="lens_joint" type="fixed">
+    <origin xyz="0.04 0 0" rpy="0 0 0"/> 
+    <parent link="camera_link"/>
+    <child link="lens_link"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="lens_link">
+  </link>
+
+  <joint name="distance_joint" type="fixed">
+    <origin xyz="0 ${-wheel_y - 0.01} 0" rpy="0 0 -${3.14/2}"/>
+    <parent link="base_link"/>
+    <child link="distance_link"/>
+  </joint>
+
+  <link name="distance_link">
+  </link>
+
+
+
+
+</robot>

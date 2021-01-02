@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<robot name="$(arg robot_name)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find gazebo_selfie_sim)/vehicles/sensors/camera/properties.xacro" />
+<xacro:include filename="$(find gazebo_selfie_sim)/vehicles/sensors/hokuyo/properties.xacro" />
+<xacro:include filename="$(find gazebo_selfie_sim)/vehicles/sensors/distance/properties.xacro" />
+<!-- Gazebo references -->
+
+<gazebo reference="base_link">
+  <mu1 value="0.0"/>
+  <mu2 value="0.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="left_rear_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/DarkGray</material>
+  <dynamics>
+    <damping>0.7</damping>
+  </dynamics>
+</gazebo>
+
+<gazebo reference="right_rear_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/DarkGray</material>
+  <dynamics>
+    <damping>0.7</damping>
+  </dynamics>
+</gazebo>
+
+<gazebo reference="left_front_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/DarkGray</material>
+  <dynamics>
+    <damping>0.7</damping>
+  </dynamics>
+</gazebo>
+
+<gazebo reference="right_front_wheel">
+  <mu1 value="1.0"/>
+  <mu2 value="1.0"/>
+  <kp  value="10000000.0" />
+  <kd  value="1.0" />
+  <material>Gazebo/DarkGray</material>
+  <dynamics>
+    <damping>0.7</damping>
+  </dynamics>
+</gazebo>
+
+<gazebo reference="right_front_indicator">
+  <material>Gazebo/Orange</material>
+  <visual>
+    <plugin name="indicator" filename="libIndicatorPlugin.so">
+      <on_color>1 0.6 0 1</on_color>
+      <off_color>0 0 0 1</off_color>
+      <topic>sim_right_turn_indicator</topic>
+      <period>1</period>
+    </plugin>
+  </visual>
+</gazebo>
+
+
+<gazebo reference="left_front_indicator">
+  <material>Gazebo/Orange</material>
+  <visual>
+    <plugin name="indicator" filename="libIndicatorPlugin.so">
+      <on_color>1 0.6 0 1</on_color>
+      <off_color>0 0 0 1</off_color>
+      <topic>sim_left_turn_indicator</topic>
+      <period>1</period>
+    </plugin>
+  </visual>
+</gazebo>
+
+
+<gazebo reference="right_back_indicator">
+  <material>Gazebo/Orange</material>
+  <visual>
+    <plugin name="indicator" filename="libIndicatorPlugin.so">
+      <on_color>1 0.6 0 1</on_color>
+      <off_color>0 0 0 1</off_color>
+      <topic>sim_right_turn_indicator</topic>
+      <period>1</period>
+    </plugin>
+  </visual>
+</gazebo>
+
+
+<gazebo reference="left_back_indicator">
+  <material>Gazebo/Orange</material>
+  <visual>
+    <plugin name="indicator" filename="libIndicatorPlugin.so">
+      <on_color>1 0.6 0 1</on_color>
+      <off_color>0 0 0 1</off_color>
+      <topic>sim_left_turn_indicator</topic>
+      <period>1</period>
+    </plugin>
+  </visual>
+</gazebo>
+
+<gazebo reference="mast_link">
+  <material>Gazebo/DarkGray</material>
+</gazebo>
+
+<gazebo reference="camera_link">
+  <material>Gazebo/DarkGray</material>
+</gazebo>
+
+<!-- Gazebo plugins -->
+
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/vehicle</robotNamespace>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    <legacyModeNS>true</legacyModeNS>
+  </plugin>
+</gazebo>
+
+
+  <!-- hokuyo -->
+<!--
+<xacro:unless value="$(optenv DISABLE_GAZEBO_LASER false)">
+  <gazebo reference="laser">
+    <material>Gazebo/Grey</material>
+    <sensor type="ray" name="hokuyo_sensor">
+      <xacro:lidar_params/>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>laser</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+</xacro:unless>
+-->
+
+<!-- hokuyo -->
+<gazebo reference="laser">
+  <sensor type="ray" name="head_hokuyo_sensor">
+    <xacro:lidar_params /> 
+    <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+      <topicName>/scan</topicName>
+      <frameName>laser</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+
+<gazebo reference="distance_link">
+  <sensor type="ray" name="distance_sensor">
+    <xacro:distance_params /> 
+    <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+      <topicName>/back_distance</topicName>
+      <frameName>base_link</frameName>
+    </plugin>
+  </sensor>
+</gazebo>
+
+<!-- main camera -->
+<xacro:unless value="$(optenv DISABLE_GAZEBO_CAMERA false)">
+  <gazebo reference="lens_link">
+    <sensor type="camera" name="camera_sensor">
+      <update_rate>100.0</update_rate>
+      <!-- math.atan(320 / 687.8065795898438) * 2 -->
+      <camera name="main_camera">
+        <xacro:camera_params />
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <xacro:camera_plugin_params />
+      </plugin>
+    </sensor>
+  </gazebo>
+</xacro:unless>
+
+
+<gazebo reference="imu_link">
+  <gravity>true</gravity>
+  <sensor name="imu_sensor" type="imu">
+    <always_on>true</always_on>
+    <update_rate>100</update_rate>
+    <visualize>false</visualize>
+    <topic>__default_topic__</topic>
+    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+      <topicName>imu</topicName>
+      <bodyName>imu_link</bodyName>
+      <updateRateHZ>100.0</updateRateHZ>
+      <gaussianNoise>0.0</gaussianNoise>
+      <xyzOffset>0 0 0</xyzOffset>
+      <rpyOffset>0 0 0</rpyOffset>
+      <frameName>imu_link</frameName>
+      <initialOrientationAsReference>false</initialOrientationAsReference>
+    </plugin>
+    <pose>0 0 0 0 0 0</pose>
+  </sensor>
+</gazebo>
+
+</robot>
