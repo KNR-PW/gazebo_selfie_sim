@@ -412,7 +412,25 @@
   <link name="distance_link">
   </link>
 
+  <joint name="depth_camera_joint" type="fixed">
+    <origin xyz="0.02 0 0.1" rpy="0 -${3.14/2} 0"/>
+    <parent link="mast_link"/>
+    <child link="depth_camera_link"/>
+  </joint>
 
+  <link name="depth_camera_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.03"  length="0.025"/>
+      </geometry>
+    </visual>
+  </link>
 
+  <joint name="depth_camera_lens_joint" type="fixed">
+    <origin xyz="0 0 0.03" rpy="0 ${3.14/2} 0"/>
+    <parent link="depth_camera_link"/>
+    <child link="depth_camera_lens"/>
+  </joint>
 
+  <link name="depth_camera_lens" />
 </robot>

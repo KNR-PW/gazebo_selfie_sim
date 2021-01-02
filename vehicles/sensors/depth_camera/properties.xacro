@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="$(arg robot_name)">
+  <xacro:macro name="depth_camera_params"  xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <update_rate>20</update_rate>
+    <camera>
+      <horizontal_fov>1.047198</horizontal_fov>
+      <image>
+        <width>640</width>
+        <height>480</height>
+        <format>R8G8B8</format>
+      </image>
+      <clip>
+        <near>0.05</near>
+        <far>3</far>
+      </clip>
+    </camera>
+  </xacro:macro>
+
+</robot>
+
+
