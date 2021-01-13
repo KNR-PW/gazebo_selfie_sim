@@ -18,13 +18,15 @@ class SimulatorBridge:
     '''Class providing interface between model in simulation and autonomy'''
 
     class DriveMode(object):
+        UNINITIALIZED = "UNINITIALIZED"
         MANUAL = "MANUAL"
         AUTOMATIC = "AUTOMATIC"
         SEMI_AUTOMATIC = "SEMI-AUTOMATIC"
 
-    DRIVE_MODE_NUMBERS = {0: DriveMode.MANUAL,
-                          1: DriveMode.SEMI_AUTOMATIC,
-                          2: DriveMode.AUTOMATIC}
+    DRIVE_MODE_NUMBERS = {0: DriveMode.UNINITIALIZED,
+                          1: DriveMode.MANUAL,
+                          2: DriveMode.SEMI_AUTOMATIC,
+                          3: DriveMode.AUTOMATIC}
 
     def __init__(self):
         rospy.init_node("simulation_bridge", anonymous=True)
@@ -67,7 +69,7 @@ class SimulatorBridge:
         self.pub_movement = rospy.Publisher(
             '/selfie_out/motion', Motion, queue_size=1)
         self.pub_drive_mode = rospy.Publisher(
-            "/switch_state", UInt8, queue_size=1)
+            "/state/rc", UInt8, queue_size=1)
 
         self.pub_vel_left_rear_wheel = rospy.Publisher(
             '/vehicle/left_rear_wheel_velocity_controller/command', Float64,
@@ -179,6 +181,7 @@ class SimulatorBridge:
         self.last_position_of_wheel = msg.position[i]
 
     def change_mode_callback(self, msg: UInt8):
+
         try:
             self.mode = self.DRIVE_MODE_NUMBERS[msg.data]
         except KeyError as e:
