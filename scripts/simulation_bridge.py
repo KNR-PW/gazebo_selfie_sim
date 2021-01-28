@@ -5,6 +5,7 @@ from custom_msgs.msg import DriveCommand
 from custom_msgs.msg import Indicators
 from custom_msgs.msg import Motion
 from std_msgs.msg import Float64
+from std_msgs.msg import Int8
 from std_msgs.msg import UInt8
 from std_msgs.msg import Bool
 from sensor_msgs.msg import JointState
@@ -59,7 +60,7 @@ class SimulatorBridge:
 
         # Init Subscribers
         self.sub_drive_mode = rospy.Subscriber(
-            "/simulation/switch_state", UInt8, self.change_mode_callback)
+            "/simulation/switch_state", Int8, self.change_mode_callback)
         self.sub_imu = rospy.Subscriber(
             '/imu', Imu, self.imu_callback)
 
@@ -67,7 +68,7 @@ class SimulatorBridge:
         self.pub_movement = rospy.Publisher(
             '/selfie_out/motion', Motion, queue_size=1)
         self.pub_drive_mode = rospy.Publisher(
-            "/switch_state", UInt8, queue_size=1)
+            "/state/rc", Int8, queue_size=1)
 
         self.pub_vel_left_rear_wheel = rospy.Publisher(
             '/vehicle/left_rear_wheel_velocity_controller/command', Float64,
@@ -170,6 +171,7 @@ class SimulatorBridge:
         self.wheels_speed = msg.velocity[i]*self.wheels_radius
 
         motion_msg = Motion()
+        motion_msg.header.stamp = rospy.Time.now()
         motion_msg.distance = self.distance
         motion_msg.speed_linear = self.wheels_speed
         motion_msg.yaw = self.imu_yaw

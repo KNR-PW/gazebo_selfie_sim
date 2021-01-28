@@ -20,6 +20,7 @@
  - `/selfie_in/indicators` ([custom_msgs/Indicators](./../../Shared/custom_msgs/msg/Indicators.msg)) - activity of right and left indicator
 
 ### Published topics
+ - `/state/rc` ([std_msgs/Int8](http://docs.ros.org/kinetic/api/std_msgs/html/msg/Int8.html)) - current state of car
 
  - `/selfie_out/motion` ([custom_msgs/Motion](./../../Shared/custom_msgs/msg/Motion.msg)) - speed, distance and Imu
 
