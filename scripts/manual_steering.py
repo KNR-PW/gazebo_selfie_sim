@@ -3,7 +3,7 @@
 """Module for keyboard ackermann steering."""
 import rospy
 from custom_msgs.msg import DriveCommand
-from std_msgs.msg import UInt8
+from std_msgs.msg import Int8
 from pynput import keyboard
 
 
@@ -39,7 +39,7 @@ class ManualSteering(object):
         self.pub_drive = rospy.Publisher(
             "/drive/manual", DriveCommand, queue_size=1)
         self.pub_switch_state = rospy.Publisher(
-            "/simulation/switch_state", UInt8, queue_size=1)
+            "/simulation/switch_state", Int8, queue_size=1)
 
         # Others
         rospy.loginfo("manual_steering initialized")
@@ -84,7 +84,7 @@ class ManualSteering(object):
     def switch_mode(self):
         self.current_drive_mode = (self.current_drive_mode + 1) % 3
 
-        self.pub_switch_state.publish(UInt8(self.current_drive_mode))
+        self.pub_switch_state.publish(Int8(self.current_drive_mode))
 
     def change_speed(self, change):
         self.current_speed += change
