@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="carollo_track_v0">
+    <include>
+      <uri>model://our_track</uri>
+      <name>track</name>
+      <pose>5.02 1.76 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+      <pose>0 0 10 0 0 0</pose>
+      <name>sun</name>
+    </include>
+
+  </world>
+</sdf>
