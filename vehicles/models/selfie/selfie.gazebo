@@ -157,7 +157,9 @@
 <!-- main camera -->
 <xacro:unless value="$(optenv DISABLE_GAZEBO_CAMERA false)">
   <gazebo reference="lens_link">
-    <sensor type="camera" name="camera_sensor">
+
+
+		<sensor type="camera" name="camera_sensor">
       <update_rate>100.0</update_rate>
       <!-- math.atan(320 / 687.8065795898438) * 2 -->
       <camera name="main_camera">
@@ -166,6 +168,27 @@
       <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
         <xacro:camera_plugin_params />
       </plugin>
+    </sensor>
+
+
+    <sensor type="camera" name="camera_recording">
+		<camera>
+			<save enabled="true">
+				<path>/tmp/camera_save_tutorial</path>
+			</save>
+			<horizontal_fov>1.58</horizontal_fov>
+			<image>
+				<width>1920</width>
+				<height>1080</height>
+			</image>
+			<clip>
+				<near>0.02</near>
+				<far>300</far>
+			</clip>
+		</camera>
+		<always_on>1</always_on>
+		<update_rate>50</update_rate>
+
     </sensor>
   </gazebo>
 </xacro:unless>
