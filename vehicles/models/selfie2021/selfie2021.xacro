@@ -294,47 +294,10 @@
   </joint>
 
 
-  <!-- Add Hokuyo laser scanner -->
 
-  <link name="laser_base">
-    <inertial>
-      <xacro:hokuyo_inertial_params />
-    </inertial>
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="0.05 0.05 0.05"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://gazebo_selfie_sim/vehicles/sensors/hokuyo/meshes/hokuyo.dae" scale="0.7 0.7 0.7"/>
-        <material name="grey" />
-      </geometry>
-    </visual>
-  </link>
-
-  <joint name="hokuyo_joint" type="fixed">
-    <origin xyz="0.24 0.0 0.04" rpy="0 0 0"/>
-    <parent link="base_link" />
-    <child link="laser_base" />
-    <axis xyz="0 0 1" />
-  </joint>
 
 
   
-  <link name="laser">
-    <inertial>
-      <xacro:hokuyo_inertial_params />
-    </inertial>
-  </link>
-
-  <joint name="laser_joint" type="fixed">
-    <origin xyz="0.0 0.0 0.015" rpy="0 0 0"/>
-    <parent link="laser_base" />
-    <child link="laser" />
-  </joint>
 
 
 
@@ -346,7 +309,7 @@
         <cylinder radius="0.01" length="0.21"/>
       </geometry>
       <material name="black"/>
-      <origin xyz="0 0 0.1051" rpy="0 0 3.14"/><!--0.26-->
+      <origin xyz="0 0 0.1051" rpy="0 0 0"/><!--0.26-->
     </visual>
   </link>
 
@@ -403,7 +366,45 @@
   <link name="lens_link">
   </link>
 
+  <joint name="distance_joint" type="fixed">
+    <origin xyz="0 ${-wheel_y - 0.01} 0" rpy="0 0 -${3.14/2}"/>
+    <parent link="base_link"/>
+    <child link="distance_link"/>
+  </joint>
 
+  <link name="distance_link">
+  </link>
 
+  <joint name="depth_camera_joint" type="fixed">
+    <origin xyz="0.02 0 0.1" rpy="0 -${3.14/2} 0"/>
+    <parent link="mast_link"/>
+    <child link="depth_camera_link"/>
+  </joint>
 
+  <link name="depth_camera_link">
+    <inertial>
+      <xacro:steering_hinge_inertial_params />
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder radius="0.03"  length="0.025"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="depth_camera_lens_joint" type="fixed">
+    <origin xyz="0 0 0.03" rpy="0 ${3.14/2} 0"/>
+    <parent link="depth_camera_link"/>
+    <child link="depth_camera_lens"/>
+  </joint>
+
+  <link name="depth_camera_lens" />
+
+  <joint name="depth_camera_lens_optical_joint" type="fixed">
+    <origin xyz="0 0 0.03" rpy="${-3.14/2} 0 ${-3.14/2}"/>
+    <parent link="depth_camera_lens"/>
+    <child link="depth_camera_lens_optical"/>
+  </joint>
+
+  <link name="depth_camera_lens_optical" />
 </robot>
