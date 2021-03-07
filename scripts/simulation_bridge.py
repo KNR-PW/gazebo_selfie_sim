@@ -10,6 +10,7 @@ from std_msgs.msg import UInt8
 from std_msgs.msg import Bool
 from sensor_msgs.msg import JointState
 from sensor_msgs.msg import Imu
+from sensor_msgs.msg import LaserScan
 
 from enum import Enum
 from math import pi
@@ -57,6 +58,8 @@ class SimulatorBridge:
             "/vehicle/joint_states", JointState, self.send_speed_and_distance)
         self.sub_indicators = rospy.Subscriber(
             "/selfie_in/indicators", Indicators, self.indicators_callback)
+        self.sub_back_dist = rospy.Subscriber(
+            "/vehicle/back_distance", LaserScan, self.back_dist_callback)
 
         # Init Subscribers
         self.sub_drive_mode = rospy.Subscriber(
@@ -69,6 +72,8 @@ class SimulatorBridge:
             '/selfie_out/motion', Motion, queue_size=1)
         self.pub_drive_mode = rospy.Publisher(
             "/state/rc", Int8, queue_size=1)
+        self.pub_back_dist = rospy.Publisher(
+            "/back_distance", Float64, queue_size=1)
 
         self.pub_vel_left_rear_wheel = rospy.Publisher(
             '/vehicle/left_rear_wheel_velocity_controller/command', Float64,
@@ -204,6 +209,12 @@ class SimulatorBridge:
         euler = tf.transformations.euler_from_quaternion(quaternion)
         self.imu_yaw = euler[2]
         self.imu_yaw_speed = msg.angular_velocity.z
+
+    def back_dist_callback(self, msg:LaserScan):
+        try:
+            self.pub_back_dist.publish(msg.ranges[0])
+        except:
+            rospy.logerr('could not retrieve back distance from laser scan')
 
 
 if __name__ == '__main__':
