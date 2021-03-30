@@ -1,8 +1,8 @@
-/** 
-* Copyright ( c ) 2019, KNR Selfie 
-* This code is licensed under BSD license (see LICENSE for details) 
-**/
-#include <mutex> //NOLINT
+/**
+ * Copyright ( c ) 2019, KNR Selfie
+ * This code is licensed under BSD license (see LICENSE for details)
+ **/
+#include <mutex>  //NOLINT
 
 #include <ignition/math/Color.hh>
 
@@ -59,8 +59,7 @@ public:
 };
 }  // namespace gazebo
 
-using namespace gazebo; //NOLINT
-
+using namespace gazebo;  // NOLINT
 
 GZ_REGISTER_VISUAL_PLUGIN(IndicatorPlugin)
 
@@ -108,8 +107,8 @@ void IndicatorPlugin::Load(rendering::VisualPtr _visual, sdf::ElementPtr _sdf)
   this->dataPtr->nh = ros::NodeHandle();
   this->dataPtr->sub =
       this->dataPtr->nh.subscribe(this->dataPtr->topic, 1000, &IndicatorPlugin::indicatorCallback, this);
-  this->dataPtr->tim = this->dataPtr->nh.createTimer(ros::Duration(this->dataPtr->period / 2),
-                                                     &IndicatorPlugin::timerCallback, this, false, false);
+  this->dataPtr->tim = this->dataPtr->nh.createTimer(
+      ros::Duration(this->dataPtr->period / 2), &IndicatorPlugin::timerCallback, this, false, false);
 }
 
 void IndicatorPlugin::changeColor(const ignition::math::Color& color)

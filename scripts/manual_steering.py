@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """Module for keyboard ackermann steering."""
 import rospy
 from custom_msgs.msg import DriveCommand
@@ -8,7 +7,6 @@ from pynput import keyboard
 
 
 class ManualSteering(object):
-
     class DriveMode(object):
         MANUAL = 0
         AUTOMATIC = 1
@@ -28,18 +26,22 @@ class ManualSteering(object):
         self.hotkey_switch_mode = keyboard.HotKey(
             keyboard.HotKey.parse("<ctrl>+n"), self.switch_mode)
         self.hotkey_increase_speed = keyboard.HotKey(
-            keyboard.HotKey.parse("a+w"), lambda: self.change_speed(self.speed_change_step))
+            keyboard.HotKey.parse("a+w"),
+            lambda: self.change_speed(self.speed_change_step))
         self.hotkey_decrease_speed = keyboard.HotKey(
-            keyboard.HotKey.parse("a+s"), lambda: self.change_speed(-self.speed_change_step))
-        self.keyboard_listener = keyboard.Listener(
-            on_press=self.on_press, on_release=self.on_release)
+            keyboard.HotKey.parse("a+s"),
+            lambda: self.change_speed(-self.speed_change_step))
+        self.keyboard_listener = keyboard.Listener(on_press=self.on_press,
+                                                   on_release=self.on_release)
         self.keyboard_listener.start()
 
         # Init Publishers
-        self.pub_drive = rospy.Publisher(
-            "/drive/manual", DriveCommand, queue_size=1)
-        self.pub_switch_state = rospy.Publisher(
-            "/simulation/switch_state", Int8, queue_size=1)
+        self.pub_drive = rospy.Publisher("/drive/manual",
+                                         DriveCommand,
+                                         queue_size=1)
+        self.pub_switch_state = rospy.Publisher("/simulation/switch_state",
+                                                Int8,
+                                                queue_size=1)
 
         # Others
         rospy.loginfo("manual_steering initialized")
@@ -95,7 +97,7 @@ if __name__ == '__main__':
         base = ManualSteering()
         base.run()
     except ValueError as e:
-        rospy.logerr("Unexpected error: "+str(e))
+        rospy.logerr("Unexpected error: " + str(e))
     except Exception as e:
-        rospy.logfatal(
-            "Unexpected error occurred, closing node. Exception:" + str(e))
+        rospy.logfatal("Unexpected error occurred, closing node. Exception:" +
+                       str(e))

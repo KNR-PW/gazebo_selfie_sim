@@ -1,7 +1,7 @@
-/** 
-* Copyright ( c ) 2019, KNR Selfie 
-* This code is licensed under BSD license (see LICENSE for details) 
-**/
+/**
+ * Copyright ( c ) 2019, KNR Selfie
+ * This code is licensed under BSD license (see LICENSE for details)
+ **/
 
 #ifndef GAZEBO_PLUGINS_BLINKVISUALPLUGIN_HH_
 #define GAZEBO_PLUGINS_BLINKVISUALPLUGIN_HH_
