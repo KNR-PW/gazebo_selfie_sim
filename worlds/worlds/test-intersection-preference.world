@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="test-intersection-preference">
+    <include>
+      <uri>model://test-intersection-preference</uri>
+      <name>track</name>
+      <pose>9.19 1.81 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+      <pose>0 0 10 0 0 0</pose>
+      <name>sun</name>
+    </include>
+  </world>
+</sdf>
