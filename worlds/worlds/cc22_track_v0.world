@@ -409,64 +409,6 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='robot'>
-        <pose>-0.24326 1e-05 0.039968 0 -4e-06 0</pose>
-        <scale>1 1 1</scale>
-        <link name='left_front_steering_hinge'>
-          <pose>-0.02326 0.10001 0.039969 0 -4e-06 2.8e-05</pose>
-          <velocity>-4.5e-05 -3e-06 -0.007463 1.7e-05 -0.00111 -1e-06</velocity>
-          <acceleration>0 -0 -0 0 -0 0</acceleration>
-          <wrench>0 -0 -0 0 -0 0</wrench>
-        </link>
-        <link name='left_front_wheel'>
-          <pose>-0.02326 0.10001 0.039969 -2e-06 0.201731 2.8e-05</pose>
-          <velocity>-4.5e-05 -3e-06 -0.00746 7.2e-05 -0.001113 -4e-06</velocity>
-          <acceleration>0 -0 -0 0 -0 0</acceleration>
-          <wrench>0 -0 -0 0 -0 0</wrench>
-        </link>
-        <link name='left_rear_steering_hinge'>
-          <pose>-0.24326 0.10001 0.039968 -0 -4e-06 7e-06</pose>
-          <velocity>-4.5e-05 -3e-06 -0.007719 2.2e-05 -0.001113 3e-06</velocity>
-          <acceleration>0 -0 -0 -0 -0 -0</acceleration>
-          <wrench>0 -0 -0 0 -0 0</wrench>
-        </link>
-        <link name='left_rear_wheel'>
-          <pose>-0.24326 0.10001 0.039968 -1e-06 0.201728 7e-06</pose>
-          <velocity>-4.5e-05 -3e-06 -0.007712 7.9e-05 -0.001114 -2e-06</velocity>
-          <acceleration>0 0 -0 0 -0 0</acceleration>
-          <wrench>0 0 -0 0 -0 0</wrench>
-        </link>
-        <link name='right_front_steering_hinge'>
-          <pose>-0.02326 -0.09999 0.039969 0 -4e-06 -2.9e-05</pose>
-          <velocity>-4.4e-05 -3e-06 -0.007475 2.8e-05 -0.001108 9e-06</velocity>
-          <acceleration>0 0 -0 -0 -0 -0</acceleration>
-          <wrench>0 0 -0 0 -0 0</wrench>
-        </link>
-        <link name='right_front_wheel'>
-          <pose>-0.02326 -0.09999 0.039969 -1e-06 0.201693 -2.9e-05</pose>
-          <velocity>-4.4e-05 -3e-06 -0.007469 8.2e-05 -0.001108 2e-06</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-        <link name='right_rear_steering_hinge'>
-          <pose>-0.24326 -0.09999 0.039968 0 -4e-06 3e-06</pose>
-          <velocity>-4.4e-05 -7e-06 -0.007689 -8e-06 -0.001113 4e-06</velocity>
-          <acceleration>-0 0 0 -0 -0 -0</acceleration>
-          <wrench>-0 0 0 0 -0 0</wrench>
-        </link>
-        <link name='right_rear_wheel'>
-          <pose>-0.24326 -0.09999 0.039968 -1e-06 0.201684 3e-06</pose>
-          <velocity>-4.4e-05 -3e-06 -0.007701 8.2e-05 -0.001105 -1e-06</velocity>
-          <acceleration>-0 0 0 0 -0 0</acceleration>
-          <wrench>-0 0 0 0 -0 0</wrench>
-        </link>
-        <link name='selfie2021'>
-          <pose>-0.24326 1e-05 0.039968 0 -4e-06 0</pose>
-          <velocity>-4.4e-05 -6e-06 -0.007693 -4e-06 -0.00111 2e-06</velocity>
-          <acceleration>-0 0 0 -0 -0 -0</acceleration>
-          <wrench>-0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
       <model name='track'>
         <pose>9.19 4.29 0 0 -0 0</pose>
         <scale>1 1 1</scale>
