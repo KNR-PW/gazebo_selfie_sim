@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   joint_state_publisher
   effort_controllers
   controller_manager
+  gazebo_plugins
 )
 
 find_package(gazebo REQUIRED)

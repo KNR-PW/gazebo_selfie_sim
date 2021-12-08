@@ -22,6 +22,8 @@
   <depend>roslint</depend>
   <depend>tf</depend>
   <depend>custom_msgs</depend>
+  <depend>gazebo_plugins</depend>
+  
 
 
   <export>
