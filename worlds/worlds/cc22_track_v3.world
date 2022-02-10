@@ -1,0 +1,1050 @@
+<sdf version='1.7'>
+  <world name='cc22_track_v3'>
+    <model name='track'>
+      <static>1</static>
+      <link name='track'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 10</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>20 10</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://cc22_track_v3/materials/scripts</uri>
+              <uri>model://cc22_track_v3/materials/textures</uri>
+              <name>basic_track/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>9.19 4.29 0 0 -0 0</pose>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='Parking_zone'>
+      <pose>1.98924 -0.282898 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Parking_zone.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>9.95372 2.97949 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <state world_name='cc22_track_v3'>
+      <sim_time>5307 50000000</sim_time>
+      <real_time>434 38483550</real_time>
+      <wall_time>1633523245 588920385</wall_time>
+      <iterations>417702</iterations>
+      <model name='20_Zone'>
+        <pose>5.63093 6.10252 0 0 -0 0.629469</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>5.63093 6.10252 0 0 -0 0.629469</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='20_Zone_End'>
+        <pose>7.97543 6.30189 0 0 -0 2.3401</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>7.97543 6.30189 0 0 -0 2.3401</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='30_Zone'>
+        <pose>14.8988 8.26058 0 0 -0 2.27141</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>14.8988 8.26058 0 0 -0 2.27141</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='30_Zone_End'>
+        <pose>8.5452 3.03846 0 0 -0 1.2526</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>8.5452 3.03846 0 0 -0 1.2526</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Barred_area'>
+        <pose>5.09851 7.01412 0 0 0 -0.819991</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>5.09851 7.01412 0 0 0 -0.819991</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Downhill_grade'>
+        <pose>19.1046 4.09776 0.144093 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>19.1046 4.09776 0.144093 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Expressway_end'>
+        <pose>16.0311 -0.320557 0 0 0 -1.57548</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>16.0311 -0.320557 0 0 0 -1.57548</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Give_way'>
+        <pose>8.19203 7.06632 0 0 0 -2.39632</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>8.19203 7.06632 0 0 0 -2.39632</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Left_turn'>
+        <pose>14.2202 7.51193 0 0 -0 2.31464</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>14.2202 7.51193 0 0 -0 2.31464</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='No_passing_zone_beginning'>
+        <pose>19.0864 6.77755 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>19.0864 6.77755 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='No_passing_zone_end'>
+        <pose>14.9463 5.32498 0 0 0 -2.47578</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>14.9463 5.32498 0 0 0 -2.47578</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Parking_zone'>
+        <pose>1.98924 -0.282898 0 0 0 -1.55626</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>1.98924 -0.282898 0 0 0 -1.55626</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Pedestrian_island'>
+        <pose>10.8946 3.5613 0 0 -0 2.08591</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>10.8946 3.5613 0 0 -0 2.08591</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Preference'>
+        <pose>14.3654 7.66537 0 0 -0 2.30628</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>14.3654 7.66537 0 0 -0 2.30628</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Preference_0'>
+        <pose>6.63736 4.93916 0 0 -0 2.28536</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>6.63736 4.93916 0 0 -0 2.28536</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Ramp'>
+        <pose>18.4114 4.22846 -0.017757 0 0 -1.57058</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.4114 4.22846 -0.017757 0 0 -1.57058</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Right_turn'>
+        <pose>4.99618 6.67416 0 0 -0 0.65564</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>4.99618 6.67416 0 0 -0 0.65564</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Right_turn_0'>
+        <pose>8.36332 6.91755 0 0 0 -2.41142</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>8.36332 6.91755 0 0 0 -2.41142</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_long_2_legs'>
+        <pose>15.6003 -0.384251 0 0 0 -1.597</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>15.6003 -0.384251 0 0 0 -1.597</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_long_2_legs_clone'>
+        <pose>16.8885 -0.394299 0 0 0 -1.53922</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>16.8885 -0.394299 0 0 0 -1.53922</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short'>
+        <pose>17.3687 -0.271797 0 0 0 -1.59471</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>17.3687 -0.271797 0 0 0 -1.59471</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone'>
+        <pose>17.6963 -0.166184 0 0 0 -1.59471</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>17.6963 -0.166184 0 0 0 -1.59471</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone_0'>
+        <pose>18.0158 -0.018092 0 0 0 -1.59471</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.0158 -0.018092 0 0 0 -1.59471</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone_1'>
+        <pose>18.2577 0.162746 0 0 0 -1.59471</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.2577 0.162746 0 0 0 -1.59471</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone_2'>
+        <pose>18.5106 0.401209 0 0 0 -1.50149</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.5106 0.401209 0 0 0 -1.50149</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone_3'>
+        <pose>18.7112 0.644653 0 0 0 -1.4379</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.7112 0.644653 0 0 0 -1.4379</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Sharp_turn_left_short_clone_4'>
+        <pose>18.8634 0.898232 0 0 0 -1.38852</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>18.8634 0.898232 0 0 0 -1.38852</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Stop'>
+        <pose>7.40622 3.93788 0 0 -0 0.707659</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>7.40622 3.93788 0 0 -0 0.707659</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Stop_0'>
+        <pose>5.17796 6.51667 0 0 -0 0.75532</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>5.17796 6.51667 0 0 -0 0.75532</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Uphill_grade'>
+        <pose>19.0243 1.41754 0 0 0 -0.221037</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>19.0243 1.41754 0 0 0 -0.221037</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='Zebra_crossing'>
+        <pose>6.26236 8.03524 0 0 0 -1.74218</pose>
+        <scale>1 1 1</scale>
+        <link name='body'>
+          <pose>6.26236 8.03524 0 0 0 -1.74218</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='track'>
+        <pose>9.19 4.29 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='track'>
+          <pose>9.19 4.29 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>9.95372 2.97949 10 0 -0 0</pose>
+      </light>
+      <light name='user_point_light_0_clone_1'>
+        <pose>8.72559 -1.12474 3.52695 0 -0 0</pose>
+      </light>
+      <light name='user_point_light_0_clone_1_clone_clone'>
+        <pose>19.9276 9.14268 3.52695 0 -0 0</pose>
+      </light>
+      <light name='user_point_light_0_clone_1_clone_clone_clone'>
+        <pose>-1.24995 9.40105 3.52695 0 -0 0</pose>
+      </light>
+      <light name='user_point_light_0_clone_1_clone_clone_clone_clone'>
+        <pose>-1.51045 -0.097396 3.52695 0 -0 0</pose>
+      </light>
+    </state>
+    <model name='Sharp_turn_left_long_2_legs'>
+      <pose>15.705 -0.334015 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_long_2_legs.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_long_2_legs_clone'>
+      <pose>16.338 -0.378908 0 0 0 -1.53922</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_long_2_legs.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short'>
+      <pose>17.3679 -0.2901 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone'>
+      <pose>17.8024 -0.10579 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone_0'>
+      <pose>18.1246 0.059282 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone_1'>
+      <pose>18.4275 0.297757 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone_2'>
+      <pose>18.5106 0.401209 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone_3'>
+      <pose>18.7112 0.644653 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Sharp_turn_left_short_clone_4'>
+      <pose>18.8634 0.898232 0 0 0 -1.59471</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Sharp_turn_left_short.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Expressway_end'>
+      <pose>16.6622 -0.320108 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Expressway_end.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Zebra_crossing'>
+      <pose>6.23893 8.02898 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Zebra_crossing.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Pedestrian_island'>
+      <pose>10.9016 3.54901 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Pedestrian_island.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Downhill_grade'>
+      <pose>19.0742 4.1645 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Downhill_grade.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Uphill_grade'>
+      <pose>19.0243 1.41754 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Uphill_grade.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='No_passing_zone_beginning'>
+      <pose>19.0607 6.69914 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/No_passing_zone_beginning.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='30_Zone'>
+      <pose>14.8988 8.26058 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/30_Zone.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Left_turn'>
+      <pose>14.2202 7.51193 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Left_turn.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Preference'>
+      <pose>14.3479 7.61733 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Preference.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='30_Zone_End'>
+      <pose>8.5452 3.03846 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/30_Zone_End.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <light name='user_point_light_0_clone_1' type='point'>
+      <pose>19.8845 4.93206 3.52695 0 -0 0</pose>
+      <diffuse>0.494118 0.494118 0.494118 1</diffuse>
+      <specular>0.0901961 0.0901961 0.0901961 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>30</range>
+        <constant>0.1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='user_point_light_0_clone_1_clone_clone' type='point'>
+      <pose>19.9276 7.47045 3.52695 0 -0 0</pose>
+      <diffuse>0.494118 0.494118 0.494118 1</diffuse>
+      <specular>0.0901961 0.0901961 0.0901961 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>30</range>
+        <constant>0.1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='Stop'>
+      <pose>7.40622 3.93788 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Stop.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Preference_0'>
+      <pose>6.63736 4.93916 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Preference.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='20_Zone'>
+      <pose>5.64389 6.11196 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/20_Zone.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Stop_0'>
+      <pose>5.18931 6.52736 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Stop.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Right_turn'>
+      <pose>5.06488 6.64673 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Right_turn.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Barred_area'>
+      <pose>5.0807 7.03321 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Barred_area.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='No_passing_zone_end'>
+      <pose>14.9463 5.32498 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/No_passing_zone_end.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Give_way'>
+      <pose>8.2402 7.01412 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Give_way.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='Right_turn_0'>
+      <pose>8.42056 6.85361 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Right_turn.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <model name='20_Zone_End'>
+      <pose>7.97543 6.30189 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/20_Zone_End.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-5.00425 2.62618 3.94469 0 0.441798 0.004139</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='Ramp'>
+      <pose>18.5966 4.04487 0 0 -0 0</pose>
+      <static>1</static>
+      <link name='body'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Ramp.stl</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://meshes/Ramp.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <light name='user_point_light_0_clone_1_clone_clone_clone' type='point'>
+      <pose>9.01632 2.36312 3.52695 0 -0 0</pose>
+      <diffuse>0.494118 0.494118 0.494118 1</diffuse>
+      <specular>0.0901961 0.0901961 0.0901961 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>30</range>
+        <constant>0.1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+    </light>
+    <light name='user_point_light_0_clone_1_clone_clone_clone_clone' type='point'>
+      <pose>-1.51045 -0.097396 3.52695 0 -0 0</pose>
+      <diffuse>0.494118 0.494118 0.494118 1</diffuse>
+      <specular>0.0901961 0.0901961 0.0901961 1</specular>
+      <direction>0 0 -1</direction>
+      <attenuation>
+        <range>30</range>
+        <constant>0.1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <cast_shadows>0</cast_shadows>
+    </light>
+  </world>
+</sdf>
