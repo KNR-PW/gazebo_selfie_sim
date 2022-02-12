@@ -30,7 +30,11 @@ include_directories(
 )
 
 catkin_package(
-  CATKIN_DEPENDS custom_msgs tf roscpp
+  CATKIN_DEPENDS
+  custom_msgs
+  gazebo_plugins
+  tf
+  roscpp
 )
 
 roslint_cpp()
