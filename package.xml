@@ -23,6 +23,7 @@
   <depend>tf</depend>
   <depend>custom_msgs</depend>
   <depend>gazebo_plugins</depend>
+  <depend>pynput-pip</depend>
   
 
 
