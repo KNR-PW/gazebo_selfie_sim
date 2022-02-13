@@ -7,6 +7,7 @@ from pynput import keyboard
 
 
 class ManualSteering(object):
+
     class DriveMode(object):
         MANUAL = 0
         AUTOMATIC = 1

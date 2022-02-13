@@ -18,6 +18,7 @@ from math import pi
 
 class SimulatorBridge:
     '''Class providing interface between model in simulation and autonomy'''
+
     class DriveMode(object):
         MANUAL = "MANUAL"
         AUTOMATIC = "AUTOMATIC"
